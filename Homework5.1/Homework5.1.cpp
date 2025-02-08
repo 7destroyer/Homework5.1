@@ -1,4 +1,6 @@
-﻿#include <iostream>
+﻿/*/
+разбиение числа на сумму двух простых чисел*/
+#include <iostream>
 #include <cmath>
 
 using namespace std;
