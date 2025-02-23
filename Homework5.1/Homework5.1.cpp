@@ -6,12 +6,13 @@
 using namespace std;
 
 bool goldbach(int num);
+bool isPrime(int num);
 
 int main()
 {
     setlocale(LC_ALL, "RU");
+
     int number;
-    int num1, num2;
     cout << "Введите четное число больше 2: " << endl;
     cin >> number;
     
@@ -22,26 +23,39 @@ int main()
         cout << "Число " << number << " нельзя представить в виде суммы двух простых чисел." << endl;
     }
 
-    for (int i = 2; i < number / 2; i++) {
-        num1 = i;
-        num2 = number - i;
-        if (goldbach(num1) && goldbach(num2)) {
-            cout << num1 << "+" << num2; 
-            return 0;
-        }
-    }
-
     return 0;
 }
 
+//проверка гипотезы Гольдбаха
 bool goldbach(int num) {
+    if (num <= 2 || num % 2 != 0) {
+        return false;
+    }
+
+    for (int i = 2; i <= num / 2; i++) {
+
+        int num1 = i;
+        int num2 = num - i;
+
+        if (isPrime(num1) && isPrime(num2)) {
+            cout << num << "=" << num1 << "+" << num2 << endl;
+            return true;
+        }
+    }
+    return false;
+}
+
+//простое ли число
+bool isPrime(int num) {
     if (num < 2) {
         cout << "Error!" << endl;
+        return false;
     }
-    for (int i = 2; i <= num; i++) {
-        if (num % 2 == 0) {
+
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) {
             return false;
         }
-        return true;
     }
+    return true;
 }
